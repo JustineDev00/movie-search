@@ -1,10 +1,8 @@
 import React from 'react';
 
-const MovieCard = ({id, title, image, handleClick}) => {
-    
-
+const FavMovieCard = ({image, title, id, handleClick}) => {
     return (
-        <div className='col-12 col-lg-3'>
+        <div className='col-12'>
             <div className="card m-3">
                 <img className="card-img-top" src={image} alt={title}/>
                 <div className="card-body">
@@ -12,7 +10,7 @@ const MovieCard = ({id, title, image, handleClick}) => {
                     
                     <p className="card-text">Movie description</p>
                     <div className='d-flex justify-content-end'>
-                    <button type="button" className="btn btn-primary me-2" onClick={handleClick} id={id}><i className="bi bi-star me-2"></i>Add to Favorites</button>
+                    <button type="button" className="btn btn-danger me-2" onClick={handleClick} id={id}><i class="bi bi-trash me-2"></i>Remove from Favorites</button>
                     </div>
                 </div>
             </div>
@@ -20,4 +18,4 @@ const MovieCard = ({id, title, image, handleClick}) => {
     );
 };
 
-export default MovieCard;
+export default FavMovieCard;
