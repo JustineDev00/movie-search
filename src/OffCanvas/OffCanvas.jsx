@@ -1,6 +1,7 @@
 import React from 'react';
+import Searchbar from '../Searchbar/Searchbar';
 
-const OffCanvas = ({movieList, movieListDisplay}) => {    //attention aux {} lors du passage de paramètres!!!
+const OffCanvas = ({movieList, movieListDisplay, onClickFunction, handleChange}) => {    //attention aux {} lors du passage de paramètres!!!
     
     
     return (
@@ -13,7 +14,14 @@ const OffCanvas = ({movieList, movieListDisplay}) => {    //attention aux {} lor
                 <div class="offcanvas-body">
                   <div class='container'>
                     <div class='row'>
-                        {movieList.length <= 0 ? `You have not added any favorite movies yet.` : movieListDisplay}
+                        {movieList.length <= 0 ? `You have not added any favorite movies yet.` : 
+                        <>
+                        <div class='col'>
+                          <Searchbar onClickFunction={onClickFunction} handleChange={handleChange}/>
+
+                        </div>
+
+                        {movieListDisplay}</>}
                     </div>
                   </div>
                 </div>

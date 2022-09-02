@@ -7,7 +7,7 @@ import FavMovieCard from './FavMovieCard/FavMovieCard';
 import Footer from './Footer/Footer';
 import MovieCard from './MovieCard/MovieCard';
 import Navbar from './Navbar/Navbar';
-import OffCanvas from './OffCanvas/OffCanvas.jsx/OffCanvas';
+import OffCanvas from './OffCanvas/OffCanvas';
 
 function App() {
 
@@ -50,37 +50,47 @@ function App() {
     setFavMoviesList(copyOfFavMoviesList);
   }
   
-
-  async function SendRequestClick(evt) {
-    evt.preventDefault();
-    let filmList = [];
-    await fetch('https://imdb-api.com/en/API/SearchMovie/k_dpub31a6/' + searchBarValue, requestOptions)
-
-      .then(response => response.json())
-
-      .then(result => { console.log(result); filmList = result.results })
-
-      .catch(error => console.log('error', error));
-
-    setMovieResults(filmList);
-
-  }
-
-
   let searchBarValue = '';
   const readSearchBar = (evt) => {
     searchBarValue = evt.target.value;
-
   }
 
+  async function SendRequestClick(evt) {
+    if(searchBarValue.trim() == ''){
+      return;
+    }
+    else{
+    evt.preventDefault();
+    let filmList = [];
+
+
+    async function FetchData(){
+      await fetch(`
+      https://api.themoviedb.org/3/search/movie?api_key=ed82f4c18f2964e75117c2dc65e2161d&query=${searchBarValue}&language=en-US`)
+       .then(resp => resp.json())
+       .then((json) => { 
+         console.log(json.results); 
+         filmList = json.results;
+       }
+       )
+       setMovieResults(filmList);
+       renderMovieResults();
+    }
+    FetchData();
+  }}
+
+ 
+
   function renderMovieResults(){
-    setMovieResultsDisplay(movieResults.map(movie => <MovieCard key={movie.id} id={movie.id} title={movie.title} image={'http://image.tmdb.org/t/p/w500' + movie.poster_path} addToFavs={addToFavorites} removeFromFavs={removeFromFavorites} favMoviesList={favMoviesList} />));
+    setMovieResultsDisplay(movieResults.map(movie => <MovieCard key={movie.id} id={movie.id} title={movie.title} image={'http://image.tmdb.org/t/p/w500' + movie.poster_path} addToFavs={addToFavorites} removeFromFavs={removeFromFavorites} favMoviesList={favMoviesList} synopsis = {movie.overview}/>));
   }
 
   function renderFavMovies(){
     setFavMoviesListDisplay(
-      favMoviesList.map(movie => <FavMovieCard key={movie.id} id={movie.id} title={movie.title} image={'http://image.tmdb.org/t/p/w500' + movie.poster_path} addToFavs={addToFavorites} removeFromFavs={removeFromFavorites}/>));
+      favMoviesList.map(movie => <FavMovieCard key={movie.id} id={movie.id} title={movie.title} image={'http://image.tmdb.org/t/p/w500' + movie.poster_path} addToFavs={addToFavorites} removeFromFavs={removeFromFavorites} favMoviesList={favMoviesList} synopsis = {movie.overview}/>));
   }
+
+
 
  //first useEffect to load default movies (most popular)
 
@@ -117,9 +127,11 @@ function App() {
   useEffect(() => {
     renderMovieResults();
     if(favMoviesList){
-    setFavMoviesListDisplay(
-        renderFavMovies());}},
-    [movieResults, favMoviesList])
+      renderFavMovies();
+    }
+  }, 
+  [movieResults, favMoviesList]);
+
 
  
 
