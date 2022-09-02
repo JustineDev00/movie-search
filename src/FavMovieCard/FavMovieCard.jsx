@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FavMovieCard = ({image, title, id, handleClick}) => {
+const FavMovieCard = ({image, title, id, removeFromFavs}) => {
     return (
         <div className='col-12'>
             <div className="card m-3">
@@ -10,7 +10,7 @@ const FavMovieCard = ({image, title, id, handleClick}) => {
                     
                     <p className="card-text">Movie description</p>
                     <div className='d-flex justify-content-end'>
-                    <button type="button" className="btn btn-danger me-2" onClick={handleClick} id={id}><i class="bi bi-trash me-2"></i>Remove from Favorites</button>
+                    <button type="button" className="btn btn-danger me-2" onClick={removeFromFavs} id={id}><i class="bi bi-trash me-2"></i>Remove from Favorites</button>
                     </div>
                 </div>
             </div>

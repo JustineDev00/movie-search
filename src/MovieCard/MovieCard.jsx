@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MovieCard = ({id, title, image, handleClick}) => {
+const MovieCard = ({id, title, image, addToFavs, removeFromFavs, favMoviesList}) => {
     
 
     return (
@@ -12,7 +12,23 @@ const MovieCard = ({id, title, image, handleClick}) => {
                     
                     <p className="card-text">Movie description</p>
                     <div className='d-flex justify-content-end'>
-                    <button type="button" className="btn btn-primary me-2" onClick={handleClick} id={id}><i className="bi bi-star me-2"></i>Add to Favorites</button>
+                    
+                    {favMoviesList ? 
+
+                    
+                    favMoviesList.find(movie => movie.id == id) ?  
+                    <button type="button" className="btn btn-danger me-2" onClick={removeFromFavs} id={id}><i class="bi bi-trash me-2"></i>Remove from Favorites</button>
+                    :
+                    <button type="button" className="btn btn-primary me-2" onClick={addToFavs} id={id}><i className="bi bi-star me-2"></i>Add to favorites
+                    </button> 
+                    
+                    :
+                    <button type="button" className="btn btn-primary me-2" onClick={addToFavs} id={id}><i className="bi bi-star me-2"></i>
+                    Add to favorites</button> 
+                
+                }
+
+
                     </div>
                 </div>
             </div>

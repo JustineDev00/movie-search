@@ -39,7 +39,7 @@ function App() {
       copyOfFavMoviesList.push(movieToAdd);
     }
     setFavMoviesList(copyOfFavMoviesList);
-    console.log(favMoviesList);
+    
   }
 
   const removeFromFavorites = (evt) => {
@@ -72,6 +72,16 @@ function App() {
     searchBarValue = evt.target.value;
 
   }
+
+  function renderMovieResults(){
+    setMovieResultsDisplay(movieResults.map(movie => <MovieCard key={movie.id} id={movie.id} title={movie.title} image={'http://image.tmdb.org/t/p/w500' + movie.poster_path} addToFavs={addToFavorites} removeFromFavs={removeFromFavorites} favMoviesList={favMoviesList} />));
+  }
+
+  function renderFavMovies(){
+    setFavMoviesListDisplay(
+      favMoviesList.map(movie => <FavMovieCard key={movie.id} id={movie.id} title={movie.title} image={'http://image.tmdb.org/t/p/w500' + movie.poster_path} addToFavs={addToFavorites} removeFromFavs={removeFromFavorites}/>));
+  }
+
  //first useEffect to load default movies (most popular)
 
   useEffect(() => {
@@ -96,7 +106,7 @@ function App() {
       }
       )
       setMovieResults(filmList);
-      setMovieResultsDisplay(movieResults.map(movie => <MovieCard key={movie.id} id={movie.id} title={movie.title} image={'http://image.tmdb.org/t/p/w500' + movie.poster_path} handleClick={addToFavorites}/>));
+      renderMovieResults();
     };
       return fetchData;
     }, [])
@@ -105,11 +115,10 @@ function App() {
   //initialize display after default movies have been received
 
   useEffect(() => {
-    setMovieResultsDisplay(movieResults.map(movie => <MovieCard key={movie.id} id={movie.id} title={movie.title} image={'http://image.tmdb.org/t/p/w500' + movie.poster_path} handleClick={addToFavorites}/>));
+    renderMovieResults();
     if(favMoviesList){
     setFavMoviesListDisplay(
-        favMoviesList.map(movie => <FavMovieCard key={movie.id} id={movie.id} title={movie.title} image={'http://image.tmdb.org/t/p/w500' + movie.poster_path} handleClick={removeFromFavorites}/>));}
-  },
+        renderFavMovies());}},
     [movieResults, favMoviesList])
 
  
