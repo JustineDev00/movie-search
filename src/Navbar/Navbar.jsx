@@ -1,6 +1,7 @@
 import React from 'react';
+import Searchbar from '../Searchbar/Searchbar';
 
-const Navbar = () => {
+const Navbar = ({onClickFunction, handleChange}) => {
     return (
         <div>
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -12,10 +13,15 @@ const Navbar = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="collapsibleNavId">
                         <div className='d-flex flex-row ms-auto'>
-                            <button type="button" className="btn btn-dark me-2"> <i className="bi bi-star"></i> My Favorites</button>
+                           
+                           
+                            <button type="button" className="btn btn-dark me-2" data-bs-toggle="offcanvas" data-bs-target='#listeFavoris'> <i className="bi bi-star"></i> My Favorites</button>
+                           
+                           
                             <form className="d-flex my-2 my-lg-0">
-                                <input className="form-control me-sm-2" type="text" placeholder="Search" />
-                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                <Searchbar onClickFunction={onClickFunction} handleChange={handleChange}/>
+                           
+                           
                             </form>
                         </div>
 
