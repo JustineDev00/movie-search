@@ -82,12 +82,12 @@ function App() {
  
 
   function renderMovieResults(){
-    setMovieResultsDisplay(movieResults.map(movie => <MovieCard key={movie.id} id={movie.id} title={movie.title} image={'http://image.tmdb.org/t/p/w500' + movie.poster_path} addToFavs={addToFavorites} removeFromFavs={removeFromFavorites} favMoviesList={favMoviesList} synopsis = {movie.overview}/>));
+    setMovieResultsDisplay(movieResults.map(movie => <MovieCard key={movie.id} id={movie.id} title={movie.title} image={'https://image.tmdb.org/t/p/w500' + movie.poster_path} addToFavs={addToFavorites} removeFromFavs={removeFromFavorites} favMoviesList={favMoviesList} synopsis = {movie.overview}/>));
   }
 
   function renderFavMovies(){
     setFavMoviesListDisplay(
-      favMoviesList.map(movie => <FavMovieCard key={movie.id} id={movie.id} title={movie.title} image={'http://image.tmdb.org/t/p/w500' + movie.poster_path} addToFavs={addToFavorites} removeFromFavs={removeFromFavorites} favMoviesList={favMoviesList} synopsis = {movie.overview}/>));
+      favMoviesList.map(movie => <FavMovieCard key={movie.id} id={movie.id} title={movie.title} image={'https://image.tmdb.org/t/p/w500' + movie.poster_path} addToFavs={addToFavorites} removeFromFavs={removeFromFavorites} favMoviesList={favMoviesList} synopsis = {movie.overview}/>));
   }
 
 
