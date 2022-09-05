@@ -2,7 +2,7 @@
   "name": "movie-search",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://{JustineDev00}.github.io/public/index.html",
+  "homepage": "https://{JustineDev00}.github.io/public/",
   "dependencies": {
     "-": "^0.0.1",
     "@testing-library/jest-dom": "^5.16.5",
